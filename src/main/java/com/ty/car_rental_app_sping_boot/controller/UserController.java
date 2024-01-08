@@ -65,7 +65,6 @@ public class UserController {
 		return userServiceObject.userLogin(email, password);
 	}
 	
-	
 	@GetMapping("/getUserByRole/{role}")
 	@Operation(description = "Get User By Role ", summary = "User Found Based On Role Successfully")
 	@ApiResponses(value = {@ApiResponse(description = "User Found Based On Role Successfully",responseCode = "201"),@ApiResponse(description = "User Doesnot Found Based On Role Successfully ",responseCode = "404")})
