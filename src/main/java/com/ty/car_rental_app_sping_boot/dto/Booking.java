@@ -20,6 +20,8 @@ public class Booking {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int bookingId;
 	
+	private BookingStatus bookingStatus;
+	
 	private String pickUpLocation;
 	
 	private String dropLocation;
@@ -49,6 +51,8 @@ public class Booking {
 
 //----getters And Setters----------------------------------------------------------------------------------------
 
+	
+	
 	public int getBookingId() {
 		return bookingId;
 	}
@@ -56,6 +60,17 @@ public class Booking {
 
 	public void setBookingId(int bookingId) {
 		this.bookingId = bookingId;
+	}
+
+	
+
+	public BookingStatus getBookingStatus() {
+		return bookingStatus;
+	}
+
+
+	public void setBookingStatus(BookingStatus bookingStatus) {
+		this.bookingStatus = bookingStatus;
 	}
 
 
