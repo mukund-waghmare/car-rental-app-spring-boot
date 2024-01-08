@@ -2,6 +2,7 @@ package com.ty.car_rental_app_sping_boot.dto;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,8 +38,9 @@ public class User {
 	
 	@ManyToMany
 	@JoinTable(joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name="car_id"))
+	@JsonIgnore
 	private List<Car> carListFromOwner;
-	
+
 	@OneToOne
 	private Booking booking;
 

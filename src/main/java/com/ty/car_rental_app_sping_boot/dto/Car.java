@@ -2,6 +2,7 @@ package com.ty.car_rental_app_sping_boot.dto;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,12 +29,21 @@ public class Car {
 	private String fuelType;
 	
 	private double mileage;
-	
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
 	private String carModel;
 	
 	private int numberOfSeats;
 	
 	@ManyToMany
+    @JsonIgnore
 	List<User> users;
 	
 	@OneToOne
