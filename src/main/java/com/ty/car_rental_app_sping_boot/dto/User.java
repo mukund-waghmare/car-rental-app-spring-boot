@@ -20,7 +20,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
 	
-	private String name;
+	private String userName;
 	
 	private String userEmail;
 	
@@ -54,12 +54,12 @@ public class User {
 		this.userId = userId;
 	}
 
-	public String getName() {
-		return name;
+	public String getuserName() {
+		return userName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setuserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getUserEmail() {
