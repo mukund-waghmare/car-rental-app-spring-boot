@@ -22,8 +22,6 @@ public class Payment {
 	private String paymentMode;
 	
 	private double totalCost;
-	
-	
 
 //-----------------------------------------------------------------------------------------------------------------
 	public int getPaymentId() {
