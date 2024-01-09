@@ -8,15 +8,27 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.ty.car_rental_app_sping_boot.dto.ResponseStructure;
 
 @RestControllerAdvice
-public class BookingException   {
+public class PaymentException {
 
-	@ExceptionHandler(BookingIdNotFoundException.class)
-	public ResponseEntity<ResponseStructure<String>> bookingIdNotFoundException(BookingIdNotFoundException  exception){
+	@ExceptionHandler(FirstPayAdvanceException.class)
+	public ResponseEntity<ResponseStructure<String>> payAdvance(FirstPayAdvanceException exception){
 		ResponseStructure<String> structure=new ResponseStructure<>();
 		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
 		structure.setMessage(exception.getMessage());
 		structure.setData("not found");
 		
 		return new ResponseEntity<ResponseStructure<String>>(structure,HttpStatus.NOT_FOUND);
+	
+	}
+	
+	@ExceptionHandler(PaymentIdNotFoundException.class)
+	public ResponseEntity<ResponseStructure<String>> paymentId(PaymentIdNotFoundException exception){
+		ResponseStructure<String> structure=new ResponseStructure<>();
+		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
+		structure.setMessage(exception.getMessage());
+		structure.setData("not found");
+		
+		return new ResponseEntity<ResponseStructure<String>>(structure,HttpStatus.NOT_FOUND);
+	
 	}
 }
