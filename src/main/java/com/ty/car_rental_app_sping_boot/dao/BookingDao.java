@@ -3,10 +3,12 @@ package com.ty.car_rental_app_sping_boot.dao;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.ty.car_rental_app_sping_boot.dto.Booking;
 import com.ty.car_rental_app_sping_boot.repository.BookingRepository;
 
+@Repository
 public class BookingDao {
 	
 	@Autowired
@@ -23,6 +25,12 @@ public class BookingDao {
 		{
 			return null;
 		}
+	}
+	
+	public Booking saveBooking(Booking booking)
+	{
+		Booking bookingobj=bookingRepository.save(booking);
+		return bookingobj;
 	}
 	
 

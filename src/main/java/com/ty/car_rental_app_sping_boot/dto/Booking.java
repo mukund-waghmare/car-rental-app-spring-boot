@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -40,10 +42,11 @@ public class Booking {
 	
 	private double extraChargesPerKilometer;
 	
+	@JsonIgnore
 	@OneToOne
 	private Car car;
 	
-	
+	@JsonIgnore
 	@OneToOne
 	Payment payment;
 

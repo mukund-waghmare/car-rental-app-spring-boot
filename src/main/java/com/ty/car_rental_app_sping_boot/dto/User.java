@@ -42,6 +42,7 @@ public class User {
 	@JsonIgnore
 	private List<Car> carListFromOwner;
 
+	@JsonIgnore
 	@OneToOne
 	private Booking booking;
 
