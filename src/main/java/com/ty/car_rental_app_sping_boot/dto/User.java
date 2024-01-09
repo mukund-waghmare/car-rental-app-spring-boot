@@ -2,6 +2,7 @@ package com.ty.car_rental_app_sping_boot.dto;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,6 +14,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
+
 @Table(name = "userInfo")
 public class User {
 	
@@ -20,7 +22,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
 	
-	private String name;
+	private String userName;
 	
 	private String userEmail;
 	
@@ -37,8 +39,10 @@ public class User {
 	
 	@ManyToMany
 	@JoinTable(joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name="car_id"))
+	@JsonIgnore
 	private List<Car> carListFromOwner;
-	
+
+	@JsonIgnore
 	@OneToOne
 	private Booking booking;
 
@@ -54,12 +58,12 @@ public class User {
 		this.userId = userId;
 	}
 
-	public String getName() {
-		return name;
+	public String getuserName() {
+		return userName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setuserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getUserEmail() {

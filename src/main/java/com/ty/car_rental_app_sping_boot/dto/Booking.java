@@ -1,9 +1,12 @@
-package com.ty.car_rental_app_sping_boot.dto;
+
+ package com.ty.car_rental_app_sping_boot.dto;
 
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,6 +21,8 @@ public class Booking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int bookingId;
+	
+	private BookingStatus bookingStatus;
 	
 	private String pickUpLocation;
 	
@@ -37,10 +42,11 @@ public class Booking {
 	
 	private double extraChargesPerKilometer;
 	
+	@JsonIgnore
 	@OneToOne
 	private Car car;
 	
-	
+	@JsonIgnore
 	@OneToOne
 	Payment payment;
 
@@ -48,6 +54,8 @@ public class Booking {
 
 //----getters And Setters----------------------------------------------------------------------------------------
 
+	
+	
 	public int getBookingId() {
 		return bookingId;
 	}
@@ -55,6 +63,17 @@ public class Booking {
 
 	public void setBookingId(int bookingId) {
 		this.bookingId = bookingId;
+	}
+
+	
+
+	public BookingStatus getBookingStatus() {
+		return bookingStatus;
+	}
+
+
+	public void setBookingStatus(BookingStatus bookingStatus) {
+		this.bookingStatus = bookingStatus;
 	}
 
 
