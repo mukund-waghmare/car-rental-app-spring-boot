@@ -46,6 +46,7 @@ public class Car {
     @JsonIgnore
 	List<User> users;
 	
+	@JsonIgnore
 	@OneToOne
 	Booking booking;
 

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface CarRepository extends JpaRepository<Car,Integer> {
+	
     List<Car> findByCarType(String carType);
 
     List<Car> findByBrand(String brand);
