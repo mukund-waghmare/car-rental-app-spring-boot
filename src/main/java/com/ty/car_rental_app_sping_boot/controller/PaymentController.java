@@ -18,10 +18,10 @@ public class PaymentController {
 	@Autowired
 	PaymentService paymentService;
 	
-	@PostMapping("/save-payment/{bookingId}")
-	public ResponseEntity<ResponseStructure<Payment>> SavePayment(@RequestBody Payment payment, @PathVariable int bookingId){
+	@PostMapping("/save-payment/{bookingId}/carowner/{ownerId}")
+	public ResponseEntity<ResponseStructure<Payment>> SavePayment(@RequestBody Payment payment, @PathVariable int bookingId, @PathVariable int ownerId){
 		
-		return paymentService.bookingConfirmation(payment, bookingId);
+		return paymentService.bookingConfirmation(payment, bookingId,ownerId);
 	}
 	
 	@GetMapping("/total-payment/bookingid/{bookingId}/endingmeter/{endingMeter}/costPerDay/{costPerDay}")

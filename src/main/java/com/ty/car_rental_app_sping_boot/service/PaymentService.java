@@ -6,9 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ty.car_rental_app_sping_boot.dao.BookingDao;
+import com.ty.car_rental_app_sping_boot.dao.CarDao;
 import com.ty.car_rental_app_sping_boot.dao.PaymentDao;
+import com.ty.car_rental_app_sping_boot.dto.Availability;
 import com.ty.car_rental_app_sping_boot.dto.Booking;
 import com.ty.car_rental_app_sping_boot.dto.BookingStatus;
+import com.ty.car_rental_app_sping_boot.dto.Car;
 import com.ty.car_rental_app_sping_boot.dto.Payment;
 import com.ty.car_rental_app_sping_boot.dto.ResponseStructure;
 import com.ty.car_rental_app_sping_boot.exception.BookingIdNotFoundException;
@@ -24,18 +27,24 @@ public class PaymentService {
 	@Autowired
 	BookingDao bookingDao;
 	
+	@Autowired
+	CarDao carDao;
+	
 
-	public ResponseEntity<ResponseStructure<Payment>> bookingConfirmation(Payment payment, int bookingid){
+	public ResponseEntity<ResponseStructure<Payment>> bookingConfirmation(Payment payment, int bookingid,int ownerId){
 		
 		Booking booking=bookingDao.findBookingById(bookingid);
 		if(booking!=null) {
 			Payment payment2=paymentDao.savePayment(payment);
 			booking.setPayment(payment2);
 			booking.setBookingStatus(BookingStatus.Confirmed);
-			
+			Car car=booking.getCar();
+			car.setCarAvailabilityStatus(Availability.booked);
+			carDao.saveCar(car, ownerId);
+			bookingDao.saveBooking(booking);
 		ResponseStructure<Payment> structure=new ResponseStructure<>();
 		structure.setStatusCode(HttpStatus.CREATED.value());
-		structure.setMessage("payment created successfully");
+		structure.setMessage("payment done successfully");
 		structure.setData(payment2);
 		
 		return new ResponseEntity<ResponseStructure<Payment>>(structure,HttpStatus.CREATED);
@@ -53,7 +62,7 @@ public class PaymentService {
 		double totalCost=0;
 		if(payment!=null) {
 			Booking booking=bookingDao.findBookingById(bookingid);
-			if(booking!=null) {
+			if(booking!=null&booking.getBookingStatus()==BookingStatus.Confirmed) {
 				booking.setEndingMeterReading(endingMeter);
 				double startMeter=booking.getStartingMeterReading();
 				double exceedTime=endingMeter-startMeter;
@@ -64,11 +73,15 @@ public class PaymentService {
 				
 				Payment updatedPayment=paymentDao.updatePayment(payment);
 				booking.setPayment(updatedPayment);
-				
-				
+				bookingDao.saveBooking(booking);
+				ResponseStructure<Payment> structure=new ResponseStructure<>();
+				structure.setStatusCode(HttpStatus.OK.value());
+				structure.setMessage("total payment done successfully");
+				structure.setData(updatedPayment);	
+				return new ResponseEntity<ResponseStructure<Payment>>(structure,HttpStatus.OK);
 			}
 			else {
-				throw new BookingIdNotFoundException();
+				throw new BookingIdNotFoundException("invalid booking id: " + bookingid);
 			}
 		}
 		else {
