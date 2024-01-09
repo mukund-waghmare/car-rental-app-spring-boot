@@ -127,9 +127,5 @@ public class User {
 	public void setBooking(Booking booking) {
 		this.booking = booking;
 	}
-	
-	
-	
-	
 
 }

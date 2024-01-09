@@ -49,8 +49,8 @@ public class CarException extends ResponseEntityExceptionHandler {
         return new ResponseEntity<ResponseStructure<String>>(responseStructure,HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(NoOfSeatsFoundException.class)
-    public ResponseEntity<ResponseStructure<String>> noOfSeatsFoundException(NoOfSeatsFoundException exception)
+    @ExceptionHandler(NoOfSeatsNotFoundException.class)
+    public ResponseEntity<ResponseStructure<String>> noOfSeatsFoundException(NoOfSeatsNotFoundException exception)
     {
         ResponseStructure<String > responseStructure= new ResponseStructure<String>();
         responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());

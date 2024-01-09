@@ -94,7 +94,7 @@ public class CarService {
             responseStructure.setData(recCar);
             return new ResponseEntity<ResponseStructure<List<Car>>>(responseStructure,HttpStatus.CREATED);
         }else{
-            throw new NoOfSeatsFoundException("No number of seats found");
+            throw new NoOfSeatsNotFoundException("No number of seats found");
         }
 
     }
