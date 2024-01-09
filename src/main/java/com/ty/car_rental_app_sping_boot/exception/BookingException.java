@@ -15,7 +15,17 @@ public class BookingException   {
 		ResponseStructure<String> structure=new ResponseStructure<>();
 		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
 		structure.setMessage(exception.getMessage());
-		structure.setData("not found");
+		structure.setData("ID not found");
+		
+		return new ResponseEntity<ResponseStructure<String>>(structure,HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler
+	public ResponseEntity<ResponseStructure<String>> BookingUnsuccessfullException(BookingUnsuccessfullException  exception){
+		ResponseStructure<String> structure=new ResponseStructure<>();
+		structure.setStatusCode(HttpStatus.NOT_FOUND.value());
+		structure.setMessage(exception.getMessage());
+		structure.setData("Booking Unsuccessfull");
 		
 		return new ResponseEntity<ResponseStructure<String>>(structure,HttpStatus.NOT_FOUND);
 	}

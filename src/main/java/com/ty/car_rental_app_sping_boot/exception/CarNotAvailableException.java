@@ -1,17 +1,13 @@
 package com.ty.car_rental_app_sping_boot.exception;
 
-public class AvaliabilityException extends RuntimeException{
+public class CarNotAvailableException extends RuntimeException{
 
 private String message;
 	
-	
-	
-	public AvaliabilityException() {
-	
+	public CarNotAvailableException() {	
 }
 
-
-	public AvaliabilityException(String message) {
+	public CarNotAvailableException(String message) {
 	this.message=message;
 }
 	

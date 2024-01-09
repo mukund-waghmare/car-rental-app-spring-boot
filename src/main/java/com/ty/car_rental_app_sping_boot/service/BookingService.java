@@ -18,12 +18,14 @@ import com.ty.car_rental_app_sping_boot.dto.Car;
 import com.ty.car_rental_app_sping_boot.dto.ResponseStructure;
 import com.ty.car_rental_app_sping_boot.dto.Role;
 import com.ty.car_rental_app_sping_boot.dto.User;
-import com.ty.car_rental_app_sping_boot.exception.AvaliabilityException;
+import com.ty.car_rental_app_sping_boot.exception.CarNotAvailableException;
 import com.ty.car_rental_app_sping_boot.exception.BookingIdNotFoundException;
+import com.ty.car_rental_app_sping_boot.exception.BookingUnsuccessfullException;
 import com.ty.car_rental_app_sping_boot.exception.BrandNotFound;
 import com.ty.car_rental_app_sping_boot.exception.CarTypeNotFoundException;
 import com.ty.car_rental_app_sping_boot.exception.NoOfSeatsFoundException;
 import com.ty.car_rental_app_sping_boot.exception.UserIdNotFoundException;
+import com.ty.car_rental_app_sping_boot.exception.UserRoleNotFoundException;
 import com.ty.car_rental_app_sping_boot.repository.BookingRepository;
 import com.ty.car_rental_app_sping_boot.repository.CarRepository;
 import com.ty.car_rental_app_sping_boot.repository.UserRepository;
@@ -80,40 +82,20 @@ public class BookingService {
 				            responseStructure.setData(bookingobj);
 				            return new ResponseEntity<ResponseStructure<Booking>>(responseStructure,HttpStatus.CREATED);
 				        }else{
-				            ResponseStructure<Booking> responseStructure = new ResponseStructure<>();
-				            responseStructure.setStatusCode(HttpStatus.BAD_REQUEST.value());
-				            responseStructure.setMessage("Unsuccessfull Booking");
-				            responseStructure.setData(null);
-				            return new ResponseEntity<ResponseStructure<Booking>>(responseStructure,HttpStatus.BAD_REQUEST);
-				        } 
-					 
+				        	throw new BookingUnsuccessfullException("Booking UnsuccessFull");
+				        } 	 
 				}
-				else
-				{
-					throw new AvaliabilityException();
-				}
-				
 			 }
-			 ResponseStructure<Booking> responseStructure = new ResponseStructure<>();
-	            responseStructure.setStatusCode(HttpStatus.BAD_REQUEST.value());
-	            responseStructure.setMessage("No Car is Available For Booking");
-	            responseStructure.setData(null);
-	            return new ResponseEntity<ResponseStructure<Booking>>(responseStructure,HttpStatus.BAD_REQUEST);
-			 
+			 throw new CarNotAvailableException();
 		 }
 		 else
 		 {
-			 throw new BrandNotFound(brand);
-			 
+			 throw new BrandNotFound(brand+ " doesnt exist"); 
 		 }
 		 }
 		 else
 		 {
-			 ResponseStructure<Booking> responseStructure = new ResponseStructure<>();
-	            responseStructure.setStatusCode(HttpStatus.BAD_REQUEST.value());
-	            responseStructure.setMessage("YOU ARE NOT A CUSTOMER");
-	            responseStructure.setData(null);
-	            return new ResponseEntity<ResponseStructure<Booking>>(responseStructure,HttpStatus.BAD_REQUEST); 
+			throw new UserRoleNotFoundException(); 
 		 }
 		 }
 		 else
@@ -162,41 +144,20 @@ public class BookingService {
 				            responseStructure.setData(bookingobj);
 				            return new ResponseEntity<ResponseStructure<Booking>>(responseStructure,HttpStatus.CREATED);
 				        }else{
-				            ResponseStructure<Booking> responseStructure = new ResponseStructure<>();
-				            responseStructure.setStatusCode(HttpStatus.BAD_REQUEST.value());
-				            responseStructure.setMessage("Unsuccessfull Booking");
-				            responseStructure.setData(null);
-				            return new ResponseEntity<ResponseStructure<Booking>>(responseStructure,HttpStatus.BAD_REQUEST);
-				        } 
-					
-					 
+				            throw new BookingUnsuccessfullException("Booking UnsuccessFull");
+				        } 	 
 				}
-				else
-				{
-					throw new AvaliabilityException();
-				}
-				
 			 }
-			 ResponseStructure<Booking> responseStructure = new ResponseStructure<>();
-	            responseStructure.setStatusCode(HttpStatus.BAD_REQUEST.value());
-	            responseStructure.setMessage("No Car is Available For Booking");
-	            responseStructure.setData(null);
-	            return new ResponseEntity<ResponseStructure<Booking>>(responseStructure,HttpStatus.BAD_REQUEST);
-			 
+			 throw new CarNotAvailableException();
 		 }
 		 else
 		 {
-			 throw new CarTypeNotFoundException(carType);
-			 
+			 throw new CarTypeNotFoundException(carType+ " doesnt exist");
 		 }
 		 }
 		 else
 		 {
-			 ResponseStructure<Booking> responseStructure = new ResponseStructure<>();
-	            responseStructure.setStatusCode(HttpStatus.BAD_REQUEST.value());
-	            responseStructure.setMessage("YOU ARE NOT A CUSTOMER");
-	            responseStructure.setData(null);
-	            return new ResponseEntity<ResponseStructure<Booking>>(responseStructure,HttpStatus.BAD_REQUEST); 
+			 throw new UserRoleNotFoundException();
 		 }
 		 }
 		 else
@@ -246,40 +207,20 @@ public class BookingService {
 				            responseStructure.setData(bookingobj);
 				            return new ResponseEntity<ResponseStructure<Booking>>(responseStructure,HttpStatus.CREATED);
 				        }else{
-				            ResponseStructure<Booking> responseStructure = new ResponseStructure<>();
-				            responseStructure.setStatusCode(HttpStatus.BAD_REQUEST.value());
-				            responseStructure.setMessage("Unsuccessfull Booking");
-				            responseStructure.setData(null);
-				            return new ResponseEntity<ResponseStructure<Booking>>(responseStructure,HttpStatus.BAD_REQUEST);
-				        } 
-					 
+				        	throw new BookingUnsuccessfullException("Booking UnsuccessFull");
+				        } 	 
 				}
-				else
-				{
-					throw new AvaliabilityException();
-				}
-				
 			 }
-			 ResponseStructure<Booking> responseStructure = new ResponseStructure<>();
-	            responseStructure.setStatusCode(HttpStatus.BAD_REQUEST.value());
-	            responseStructure.setMessage("No Car is Available For Booking");
-	            responseStructure.setData(null);
-	            return new ResponseEntity<ResponseStructure<Booking>>(responseStructure,HttpStatus.BAD_REQUEST);
-			 
+			 throw new CarNotAvailableException();
 		 }
 		 else
 		 {
-			 throw new NoOfSeatsFoundException("Seats not Matched Exception");
-			 
+			 throw new NoOfSeatsFoundException(seats+" Seaters dosent exist");
 		 }
 		 }
 		 else
 		 {
-			 ResponseStructure<Booking> responseStructure = new ResponseStructure<>();
-	            responseStructure.setStatusCode(HttpStatus.BAD_REQUEST.value());
-	            responseStructure.setMessage("YOU ARE NOT A CUSTOMER");
-	            responseStructure.setData(null);
-	            return new ResponseEntity<ResponseStructure<Booking>>(responseStructure,HttpStatus.BAD_REQUEST); 
+			 throw new UserRoleNotFoundException();
 		 }
 		 }
 		 else
@@ -331,7 +272,6 @@ public class BookingService {
 			            responseStructure.setData(null);
 			            return new ResponseEntity<ResponseStructure<Booking>>(responseStructure,HttpStatus.BAD_REQUEST);
 			        } 
-				 
 			 }
 			 else
 			 {
